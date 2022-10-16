@@ -20,6 +20,5 @@ class Category extends Model
         'meta_keyword',
         'meta_description',
         'status',
-
     ];
 }
