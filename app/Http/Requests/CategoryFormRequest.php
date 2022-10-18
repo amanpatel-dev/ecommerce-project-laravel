@@ -22,40 +22,69 @@ class CategoryFormRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {  
         return [
-        'name'=>[
-            'required',
-            'string'
-        ],
-        'slug'=>[
-            'required',
-            'string'
-        ],
-        'description'=>[
-            'required',
-          
-        ],
-        'image'=>[
-            'nullable',
-            'mimes:jpg,jpeg,png'
-        ],
+            'name'=>
+                'required',
+              
+            'slug'=>
+                'required',
+               
+            'description'=>
+                'required'
+            ,
+            'image'=>
+                'nullable',
+                'mimes:jpg,jpeg,png'
+            ,
+    
+            'meta_title'=>
+                'required',
+            
+    
+            'meta_keyword'=>
+                'required',
+             
+    
+            'meta_description'=>
+                'required',
+             
+            ];
+ 
 
-        'meta_title'=>[
-            'required',
-            'string'
-        ],
+        // return [
+        // 'name'=>[
+        //     'required',
+        //     'string'
+        // ],
+        // 'slug'=>[
+        //     'required',
+        //     'string'
+        // ],
+        // 'description'=>[
+        //     'required',
+        // ],
+        // 'image'=>[
+        //     'nullable',
+        //     'mimes:jpg,jpeg,png'
+        // ],
 
-        'meta_keyword'=>[
-            'required',
-            'string'
-        ],
+        // 'meta_title'=>[
+        //     'required',
+        //     'string'
+        // ],
 
-        'meta_description'=>[
-            'required',
-            'string'
-        ],
+        // 'meta_keyword'=>[
+        //     'required',
+        //     'string'
+        // ],
 
-        ];
+        // 'meta_description'=>[
+        //     'required',
+        //     'string'
+        // ],
+
+        // ];
+
     }
 }

@@ -8,7 +8,7 @@
                     <a href="{{ url('admin/category/create') }}" class="btn btn-primary btn-sm float-end"> Back</a>
                 </h4>
                 <div class="card-body">
-                    <form action="{{'admin/category'}}" enctype="multipart/form-data">
+                    <form action="{{url('admin/category')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -69,9 +69,7 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <button type="submit" class="btn btn-primary float-end">Save</button>
-
                         </div>
-
                     </form>
 
                 </div>

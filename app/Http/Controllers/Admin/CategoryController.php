@@ -12,6 +12,7 @@ use App\Http\Requests\CategoryFormRequest;
 class CategoryController extends Controller
 {
     public function index()
+    {
         return view('admin.category.index');
     }
     public function create()
@@ -21,8 +22,9 @@ class CategoryController extends Controller
 
     public function store(CategoryFormRequest $request)
     {
-        $validatedData = $request->validate();
 
+        $validatedData = $request->validated();
+        
         $category = new Category;
 
         $category->name = $validatedData['name'];
@@ -30,25 +32,22 @@ class CategoryController extends Controller
         $category->description = $validatedData['description'];
 
         // this is the functoin as we did iun the php for the image upload
-        
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time() . '_' . $ext;
+            $filename = time() . '.' . $ext;
             $file->move('uploads/category', $filename);
             $category->image = $validatedData['image'];
         }
 
-
-
         $category->meta_title = $validatedData['meta_title'];
         $category->meta_keyword = $validatedData['meta_keyword'];
         $category->meta_description = $validatedData['meta_description'];
-
         $category->status = $request->status == true ? '1' : '0';
 
         $category->save();
 
-        return redirect('admin/category')->with('message','Category Added Successfully');
+        return redirect('admin/category')->with('message', 'Category Added Successfully');
     }
 }
