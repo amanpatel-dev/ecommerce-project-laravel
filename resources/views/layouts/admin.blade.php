@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    @livewireScripts
+
 
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
@@ -53,7 +53,9 @@
     <script src="{{ asset('admin/js/data-table.js') }}"></script>
     <script src="{{ asset('admin/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('admin/js/dataTables.bootstrap4.js') }}"></script>
-
+    @livewireScripts
+    {{-- the stack script is used for the livewiree= index.blade.php --}}
+    @stack('script')
 </body>
 
 </html>

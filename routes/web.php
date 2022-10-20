@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,12 +37,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     //dashboard
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+ 
+    Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function () {
+        Route::get('/category', 'index');
+        Route::get('/category/create', 'create');
+        Route::post('/category', 'store');       
+        Route::get('/category/{category}/edit','edit');
+        Route::put('/category/{Category}/','update');
+        
 
-    //category
-    Route::get('category', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
-    Route::get('category/create', [App\Http\Controllers\Admin\CategoryController::class, 'create']);
-
-
-    Route::post('category', [App\Http\Controllers\Admin\CategoryController::class, 'store']);
+    });
+    
 
 });
