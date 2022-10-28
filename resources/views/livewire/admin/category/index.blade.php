@@ -1,6 +1,6 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -49,9 +49,13 @@
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->stat == '1' ? 'Hidden' : 'Visible' }}</td>
                                         <td>
+                                            {{-- -------this is the edit part here we are using the url and a whole new page- --}}
+
                                             <a href="{{ url('admin/category/' . $category->id . '/edit') }}"
                                                 class="btn btn-success me-2">Edit</a>
-                                            {{-- deleteCategory is  a function   --}}
+
+                                            {{-- deleteCategory is  a function in the index.php of category  --}}
+
                                             <a href="" wire:click="deleteCategory({{ $category->id }})"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"
                                                 class="btn btn-danger">Delete</a>
@@ -70,12 +74,10 @@
     </div>
 </div>
 @push('script')
-
-<script>
-    window.addEventListener('close-modal',event=>{
-        // this id is the data-bs-modal
-        $('#deleteModal').modal('hide');
-    })
-</script>
-
+    <script>
+        window.addEventListener('close-modal', event => {
+            // this id is the data-bs-modal
+            $('#deleteModal').modal('hide');
+        })
+    </script>
 @endpush
