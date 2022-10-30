@@ -14,15 +14,29 @@
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/admin/category/create">Add Category</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">View Category</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/category/create')}}">Add Category</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/category')}}">View Category</a></li>
           </ul>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
+        <a href="#product" data-bs-toggle="collapse" aria-expanded="false"aria-controls="product" class="nav-link">
+          <i class="mdi   mdi-scale-balance menu-icon"></i>
+        
+          <span class="menu-title">Product</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="product">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/product/create')}}">Add Product</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/product')}}">View Product</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('/admin/brands')}}">
           <i class="mdi mdi-view-headline menu-icon"></i>
-          <span class="menu-title">Form elements</span>
+          <span class="menu-title">Brands</span>
         </a>
       </li>
       <li class="nav-item">

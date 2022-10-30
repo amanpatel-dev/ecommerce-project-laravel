@@ -47,5 +47,5 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
 
     //Barand part routes
-    Route::get('/brands',[App\Http\Controllers\Admin\BrandController::class,'index'])->name('index');
+    Route::get('/brands', [App\Http\Controllers\Admin\BrandController::class, 'index'])->name('index');
 });
