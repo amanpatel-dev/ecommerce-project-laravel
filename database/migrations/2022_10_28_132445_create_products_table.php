@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('trending')->default('0')->comment('1=tending,0=not-trending');
             $table->tinyInteger('status')->default('0')->comment('1=hidden,0=visible');
             
-            $table->string('metal_title')->nullable();
+            $table->string('meta_title')->nullable();
             $table->mediumText('meta_keyword')->nullable();
             $table->mediumText('meta_description')->nullable();
             
