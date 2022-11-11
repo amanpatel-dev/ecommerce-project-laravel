@@ -28,8 +28,8 @@
         </a>
         <div class="collapse" id="product">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/productS/create')}}">Add Product</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/productS')}}">View Product</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/products/create')}}">Add Product</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('/admin/products')}}">View Product</a></li>
           </ul>
         </div>
       </li>
@@ -37,6 +37,12 @@
         <a class="nav-link" href="{{url('/admin/brands')}}">
           <i class="mdi mdi-view-headline menu-icon"></i>
           <span class="menu-title">Brands</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('/admin/colors')}}">
+          <i class="mdi mdi-view-headline menu-icon"></i>
+          <span class="menu-title">Colors </span>
         </a>
       </li>
       <li class="nav-item">

@@ -27,6 +27,10 @@ class Product extends Model
         'meta_keyword',
         'meta_description',
     ];
+    //this is the relationship that we are using to get the name of the category in the product view table
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id','id');
+    }
 
     public function productImages(){
         return $this->hasMany(ProductImage::class,'product_id','id');
