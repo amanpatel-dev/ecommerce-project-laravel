@@ -55,7 +55,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/products/{product_id}/delete/','destroy');
 
         Route::get('/product-image/{product_image_id}/delete/','destroyImage');
-
+        
+        Route::post('/product-color/{prod_color_id}','updateProdColorQty');
+        Route::get('/product-color/{prod_color_id}/delete','deleteProdColor');
+       
 
     });
     //Brand part routes
@@ -65,7 +68,14 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::controller(App\Http\Controllers\Admin\ColorController::class)->group(function () {
         Route::get('/colors','index');
         Route::get('/colors/create','create');
-        
-
+        Route::post('/colors/create','store');
+        Route::get('/colors/{color}/edit','edit');
+        Route::put('/colors/{color_id}','update');
+        Route::get('/colors/{color_id}/delete','destroy');
     });
+    Route::controller(App\Http\Controllers\Admin\SliderController::class)->group(function () {
+        Route::get('/slider','index');
+        Route::get('/slider/create','create');
+        Route::post('/slider/create','store');
+    }); 
 });
