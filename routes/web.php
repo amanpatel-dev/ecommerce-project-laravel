@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::middleware([
     'auth:sanctum',
@@ -30,7 +30,7 @@ Route::middleware([
 });
 
 Auth::routes();
-
+Route::get('/',[App\Http\Controllers\Frontend\FrontendController::class,'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -77,5 +77,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/slider','index');
         Route::get('/slider/create','create');
         Route::post('/slider/create','store');
-    }); 
+        Route::get('/slider/{slider_id}/edit','edit');
+        Route::put('/slider/{slider_id}','update');
+        Route::get('/slider/{slider_id}/delete','destroy');
+    });
 });

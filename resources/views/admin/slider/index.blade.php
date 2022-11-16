@@ -30,17 +30,15 @@
                                         <td>{{$slider->title}}</td>
                                         <td>{{$slider->description}}</td>
                                         <td>
-                                            <img src="{{asset("$slider->image")}}" alt="" style="width:auto ; height:70px">
+                                            <img src="{{asset("$slider->image")}}" alt=""  style="width:auto ; height:40px ; border-radius:0">
                                         </td>
                                         <td>{{$slider->status=='0'?'visible':'hidden'}}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary">Edit</a>
-                                            <a href=""  class="btn btn-danger"> Delete</a>
+                                            <a href="{{url('admin/slider/'.$slider->id.'/edit')}}" class="btn btn-primary">Edit</a>
+                                            <a href="{{url('admin/slider/'.$slider->id.'/delete')}}"  class="btn btn-danger"> Delete</a>
                                         </td>
                                     </tr>
-
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>

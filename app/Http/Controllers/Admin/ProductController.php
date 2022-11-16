@@ -147,7 +147,7 @@ class ProductController extends Controller
                             'color_id' => $color,
                             'quantity' => $request->colorquantity[$key]
                             //?? = default
-    
+
                         ]
                     );
                 }
@@ -184,22 +184,21 @@ class ProductController extends Controller
 
         return redirect()->back()->with('message', 'No Such Product Id found');
     }
-//this Request is used for the ajax becase we are using the ajax for the upadation
+    //this Request is used for the ajax becase we are using the ajax for the upadation
     public function updateProdColorQty(Request $request, $prod_color_id)
-    { 
+    {
         $productColorData = Product::findOrFail($request->product_id)->productColors()->where('id', $prod_color_id)->first();
         $productColorData->update([
             'quantity' => $request->qty
         ]);
-    //    dd($request);
+        //    dd($request);
         return response()->json(['message' => 'Product Color Qty Updated']);
     }
 
     public function deleteProdColor($prod_color_id)
     {
-        $prodColor=ProductColor::findOrFail($prod_color_id);
+        $prodColor = ProductColor::findOrFail($prod_color_id);
         $prodColor->delete();
-        return response()->json(['message'=>'Product Color Deleted']);
+        return response()->json(['message' => 'Product Color Deleted']);
     }
-
 }
