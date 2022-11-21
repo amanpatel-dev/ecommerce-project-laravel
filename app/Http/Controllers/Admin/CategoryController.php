@@ -34,13 +34,13 @@ class CategoryController extends Controller
         $category->description = $validatedData['description'];
 
         // this is the functoin as we did iun the php for the image upload
-
+        $uploadPath='uploads/category/';
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
-            $file->move('uploads/category', $filename);
-            $category->image = $filename;
+            $file->move('uploads/category/', $filename);
+            $category->image = $uploadPath.$filename;
         }
 
         $category->meta_title = $validatedData['meta_title'];
@@ -79,11 +79,12 @@ class CategoryController extends Controller
             if(File::exists($path)){
                 File::delete($path);
             }
+            $uploadPath='uploads/category/';
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
-            $file->move('uploads/category', $filename);
-            $category->image = $filename;
+            $file->move('uploads/category/', $filename);
+            $category->image = $uploadPath.$filename;
         }
 
         $category->meta_title = $validatedData['meta_title'];

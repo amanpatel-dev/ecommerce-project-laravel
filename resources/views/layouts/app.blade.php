@@ -9,18 +9,24 @@
 
     <title>    @yield('title') </title>
 
+   <meta name="description" content="@yield('meta_description')">
+   <meta name="" content="@yield('meta_keyword')">
+   <meta name="" content="ecommerce">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
     <!-- Styles -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/css/custom.css') }}">
     @livewireStyles
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        @include('layouts.include.frontend.navbar')
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -72,7 +78,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         <main class="py-4">
             @yield('content')
@@ -81,7 +87,9 @@
     
     <!-- Scripts -->
     <script src="{{ asset('assets/js/jquery-3.6.0.js') }}" defer></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}" defer></script>
+    {{-- <script src="{{ asset('assets/js/bootstrap.min.js') }}" defer></script> --}}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     @livewireScripts
 </body>
 </html>

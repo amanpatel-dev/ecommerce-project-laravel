@@ -34,7 +34,7 @@
                                 <label for="">Image</label>
                      
                                     <input type="file" name="image" class="form-control">
-                           
+                                
                                 <span class="mb-3 mt-3 ">
                                     <img src="{{ asset($sliders->image) }}" alt=""
                                         style="height: auto; width:250px">
