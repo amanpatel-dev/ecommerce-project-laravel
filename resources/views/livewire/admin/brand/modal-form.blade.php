@@ -12,6 +12,18 @@
             <form wire:submit.prevent="storeBrand">
                 <div class="modal-body">
                     <div class="mb-3">
+                        <label for="">
+                            Selected Category
+                        </label>
+                        <select name="" wire:model.defer="category_id" required class="form-control"
+                            id="">
+                            <option value="">--Select Category--</option>
+                            @foreach ($categories as $cateItem)
+                            <option value="{{$cateItem->id}}">{{$cateItem->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="">Brand Name</label>
                         <input type="text" wire:model.defer="name" class="form-control">
                         @error('name')
@@ -70,6 +82,18 @@
                 <form wire:submit.prevent="updateBrand">
                     <div class="modal-body">
                         <div class="mb-3">
+                            <label for="">
+                                Selected Category
+                            </label>
+                            <select name="" wire:model.defer="category_id" required class="form-control"
+                                id="">
+                                <option value="">--Select Category--</option>
+                                @foreach ($categories as $cateItem)
+                                <option value="{{$cateItem->id}}">{{$cateItem->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="">Brand Name</label>
                             <input type="text" wire:model.defer="name" class="form-control">
                             @error('name')
@@ -106,7 +130,7 @@
         </div>
     </div>
 </div>
-{{---Delte modal---}}
+{{-- -Delte modal- --}}
 <div wire:ignore.self class="modal fade" id="deleteBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -124,7 +148,7 @@
             <div wire:loading.remove>
                 <form wire:submit.prevent="destroyBrand">
                     <div class="modal-body">
-                      <h3>Are you sure</h3>
+                        <h3>Are you sure</h3>
 
                     </div>
                     <div class="modal-footer">

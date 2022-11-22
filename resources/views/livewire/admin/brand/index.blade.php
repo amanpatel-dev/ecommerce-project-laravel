@@ -18,6 +18,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Category</th>
                                     <th>Slug</th>
                                     <th>Action</th>
                                 </tr>
@@ -28,6 +29,7 @@
                                     <tr>
                                         <td>{{ $brand->id }}</td>
                                         <td>{{ $brand->name }}</td>
+                                        <td>{{ $brand->category->name }}</td>
                                         <td>{{ $brand->slug }}</td>
                                         <td>{{ $brand->status == '1' ? 'hidden' : 'visible' }}</td>
                                         <td><a href="#" wire:click="editBrand({{$brand->id}})"  data-bs-toggle="modal" data-bs-target="#updateBrandModal" class="btn btn-sm btn-success">Edit</a></td>
