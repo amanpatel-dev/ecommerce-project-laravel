@@ -31,14 +31,24 @@ Route::middleware([
 
 Auth::routes();
 
+//frontend 
 Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
-    Route::get('/','index');
-    Route::get('/collections','categories');
-    Route::get('/collections/{category_slug}','products');
-    Route::get('/collections/{category_slug}/{product_slug}','productView');
-
-
+    Route::get('/', 'index');
+    Route::get('/collections', 'categories');
+    Route::get('/collections/{category_slug}', 'products');
+    Route::get('/collections/{category_slug}/{product_slug}', 'productView');
 });
+
+//this is when the user is not loged in 
+Route::middleware(['auth'])->group(function () {
+    //wishlist
+    Route::controller(App\Http\Controllers\Frontend\WishlistController::class)->group(function () {
+        Route::get('/wishlist', 'index');
+    }); 
+});
+
+
+
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     //dashboard
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
@@ -52,38 +62,36 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     //Product controller
     Route::controller(App\Http\Controllers\Admin\ProductController::class)->group(function () {
-        Route::get('/products','index');
-        Route::get('/products/create','create');
-        Route::post('/products','store');
-        Route::get('/products/{produc}/edit','edit');
-        Route::put('/products/{product}','update');
-        Route::get('/products/{product_id}/delete/','destroy');
+        Route::get('/products', 'index');
+        Route::get('/products/create', 'create');
+        Route::post('/products', 'store');
+        Route::get('/products/{produc}/edit', 'edit');
+        Route::put('/products/{product}', 'update');
+        Route::get('/products/{product_id}/delete/', 'destroy');
 
-        Route::get('/product-image/{product_image_id}/delete/','destroyImage');
-        
-        Route::post('/product-color/{prod_color_id}','updateProdColorQty');
-        Route::get('/product-color/{prod_color_id}/delete','deleteProdColor');
-       
+        Route::get('/product-image/{product_image_id}/delete/', 'destroyImage');
 
+        Route::post('/product-color/{prod_color_id}', 'updateProdColorQty');
+        Route::get('/product-color/{prod_color_id}/delete', 'deleteProdColor');
     });
     //Brand part routes
     Route::get('/brands', [App\Http\Controllers\Admin\BrandController::class, 'index'])->name('index');
 
     //color controller
     Route::controller(App\Http\Controllers\Admin\ColorController::class)->group(function () {
-        Route::get('/colors','index');
-        Route::get('/colors/create','create');
-        Route::post('/colors/create','store');
-        Route::get('/colors/{color}/edit','edit');
-        Route::put('/colors/{color_id}','update');
-        Route::get('/colors/{color_id}/delete','destroy');
+        Route::get('/colors', 'index');
+        Route::get('/colors/create', 'create');
+        Route::post('/colors/create', 'store');
+        Route::get('/colors/{color}/edit', 'edit');
+        Route::put('/colors/{color_id}', 'update');
+        Route::get('/colors/{color_id}/delete', 'destroy');
     });
     Route::controller(App\Http\Controllers\Admin\SliderController::class)->group(function () {
-        Route::get('/slider','index');
-        Route::get('/slider/create','create');
-        Route::post('/slider/create','store');
-        Route::get('/slider/{slider_id}/edit','edit');
-        Route::put('/slider/{slider_id}','update');
-        Route::get('/slider/{slider_id}/delete','destroy');
+        Route::get('/slider', 'index');
+        Route::get('/slider/create', 'create');
+        Route::post('/slider/create', 'store');
+        Route::get('/slider/{slider_id}/edit', 'edit');
+        Route::put('/slider/{slider_id}', 'update');
+        Route::get('/slider/{slider_id}/delete', 'destroy');
     });
 });

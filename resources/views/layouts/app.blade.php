@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,22 +8,27 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>    @yield('title') </title>
+    <title> @yield('title') </title>
 
-   <meta name="description" content="@yield('meta_description')">
-   <meta name="" content="@yield('meta_keyword')">
-   <meta name="" content="ecommerce">
+    <meta name="description" content="@yield('meta_description')">
+    <meta name="" content="@yield('meta_keyword')">
+    <meta name="" content="ecommerce">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
+
     <!-- Styles -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
     @livewireStyles
 </head>
+
 <body>
     <div id="app">
         @include('layouts.include.frontend.navbar')
@@ -84,12 +90,20 @@
             @yield('content')
         </main>
     </div>
-    
+
     <!-- Scripts -->
     <script src="{{ asset('assets/js/jquery-3.6.0.js') }}" defer></script>
     {{-- <script src="{{ asset('assets/js/bootstrap.min.js') }}" defer></script> --}}
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    
+    <script>
+        window.addEventListener('message', event => {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.notify (event.detail.text);
+        });
+    </script>
     @livewireScripts
 </body>
+
 </html>

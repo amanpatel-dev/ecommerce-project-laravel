@@ -1,12 +1,17 @@
 <div>
     <div class="py-3 py-md-5 bg-light">
         <div class="container">
+            @if (session()->has('message'))
+                <div class="alert alert-danger">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-5 mt-3">
-                    <div class="bg-white border">
+                    <div class="bg-white border d-flex justify-content-center">
                         @if ($product->productImages)
-                            <img src="{{ asset($product->productImages[0]->image) }}"
-                                class="w-100 product-view-img d-flex" alt="Img">
+                            <img src="{{ asset($product->productImages[0]->image) }}" class=" product-view-img d-flex"
+                                alt="Img">
 
                         @else{
                             <div class="">
@@ -42,14 +47,14 @@
                                         </div> --}}
                                         <label class="colorSelectionLabel btn btn-sm"
                                             style="background-color:{{ $colorItem->color->code }}"
-                                            wire:click="colorSelected({{ $colorItem->id }})" >
+                                            wire:click="colorSelected({{ $colorItem->id }})">
                                             {{ $colorItem->color->name }}
 
                                         </label>
                                     @endforeach
                                 @endif
-                           {{-- {{dd($this->prodColorSelectedQuantity)}} --}}
-                           <br>
+                                {{-- {{dd($this->prodColorSelectedQuantity)}} --}}
+                                <br>
                                 @if ($prodColorSelectedQuantity == 'outOfStock')
                                     <label class="btn-sm py-1 mt-2 text-white  bg-danger">Out Of Stock</label>
                                 @elseif($prodColorSelectedQuantity > 0)
@@ -66,14 +71,22 @@
                         </div>
                         <div class="mt-2">
                             <div class="input-group">
-                                <span class="btn btn1"><i class="fa fa-minus"></i></span>
-                                <input type="text" value="1" class="input-quantity" />
-                                <span class="btn btn1"><i class="fa fa-plus"></i></span>
+                                <span class="btn btn1" wire:click="decrementQuantity"><i class="fa fa-minus"></i></span>
+                                <input type="text"     wire:model="quantityCount" value="{{$this->quantityCount}}" readonly class="input-quantity" />
+                                <span class="btn btn1" wire:click="incrementQuantity"><i class="fa fa-plus"></i></span>
                             </div>
                         </div>
                         <div class="mt-2">
                             <a href="" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Add To Cart</a>
-                            <a href="" class="btn btn1"> <i class="fa fa-heart"></i> Add To Wishlist </a>
+
+                            <button type="button" class="btn btn1" wire:click="addToWishList({{ $product->id }})">
+                                
+                                <span wire:loading.remove wire:target="addToWishList">
+                                    <i class="fa fa-heart"></i> Add To Wishlist 
+                                </span>
+                                <span wire:loading wire:target="addToWishList"> Adding</span>
+
+                            </button>
                         </div>
                         <div class="mt-3">
                             <h5 class="mb-0">Small Description</h5>
