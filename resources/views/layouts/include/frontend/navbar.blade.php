@@ -19,8 +19,8 @@
                     <ul class="nav justify-content-end">
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-shopping-cart"></i> Cart (0)
+                            <a class="nav-link" href="{{url('cart')}}">
+                                <i class="fa fa-shopping-cart"></i> Cart (<livewire:frontend.cart.cart-count/>)
                             </a>
                         </li>
                         <li class="nav-item">
@@ -51,7 +51,7 @@
                             <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
                             <li><a class="dropdown-item" href="{{url('wishlist')}}"><i class="fa fa-heart"></i> My Wishlist</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+                            <li><a class="dropdown-item" href="{{url('cart')}}"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
                             <li>
                               
                                 <a class="dropdown-item" href="{{ route('logout') }}"

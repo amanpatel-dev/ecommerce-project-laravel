@@ -42,11 +42,13 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
 //this is when the user is not loged in 
 Route::middleware(['auth'])->group(function () {
     //wishlist
-    Route::controller(App\Http\Controllers\Frontend\WishlistController::class)->group(function () {
-        Route::get('/wishlist', 'index');
-    }); 
+        Route::get('/wishlist',[App\Http\Controllers\Frontend\WishlistController::class,'index'] );
+        Route::get('/cart',[App\Http\Controllers\Frontend\CartController::class,'index']);
+        Route::get('/checkout',[App\Http\Controllers\Frontend\CheckoutController::class,'index']);
+   
 });
 
+Route::get('thank-you',[App\Http\Controllers\Frontend\FrontendController::class,'thankyou']);
 
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
