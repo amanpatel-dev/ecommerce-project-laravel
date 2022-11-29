@@ -14,7 +14,36 @@ class CheckoutShow extends Component
     public $carts, $totalProductAmount;
 
     public $fullname, $email, $phone, $pincode, $address, $payment_mode = NULL, $payment_id = NULL;
-    // protected $listeners  = ['CartAddedUpdated'=>'codOrder'];
+    protected $listeners  = ['validationForAll', 'transactionEmit' => 'paidOnlineOrder'];
+
+    public function paidOnlineOrder($value)
+    {
+        $this->payment_id = $value;
+        $this->payment_mode = 'Paid By PayPal';
+
+        $codOrder = $this->placeOrder();
+        if ($codOrder) {
+            Cart::where('user_id', auth()->user()->id)->delete();
+            $this->emit('CartAddedUpdated');
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Order Placed successfully',
+                'type' => 'success',
+                'status' => 200
+            ]);
+            return redirect()->to('thank-you');
+        } else {
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Something went wrong',
+                'type' => 'error',
+                'status' => 500
+            ]);
+        }
+    }
+
+    public function validationForAll()
+    {
+        $this->validate();
+    }
     public function rules()
     {
         return [
@@ -41,6 +70,7 @@ class CheckoutShow extends Component
             'payment_id' => $this->payment_id,
         ]);
         foreach ($this->carts  as $cartItem) {
+
             $this->totalProductAmount += $cartItem->product->selling_price * $cartItem->quantity;
             $orderItems = OrderItem::create([
                 'order_id' => $order->id,
@@ -49,6 +79,12 @@ class CheckoutShow extends Component
                 'quantity' => $cartItem->quantity,
                 'price' => $cartItem->product->selling_price,
             ]);
+
+            if ($cartItem->product_color_id != NULL) {
+                $cartItem->productColor()->where('id', $cartItem->product_color_id)->decrement('quantity', $cartItem->quantity);
+            } else {
+                $cartItem->product()->where('id', $cartItem->product_id)->decrement('quantity', $cartItem->quantity);
+            }
         }
         return $order;
     }
@@ -57,7 +93,7 @@ class CheckoutShow extends Component
         $this->payment_mode = 'cash on delivey';
         $codOrder = $this->placeOrder();
         if ($codOrder) {
-            Cart::where('user_id',auth()->user()->id)->delete();
+            Cart::where('user_id', auth()->user()->id)->delete();
             $this->emit('CartAddedUpdated');
             $this->dispatchBrowserEvent('message', [
                 'text' => 'Order Placed successfully',
@@ -75,6 +111,7 @@ class CheckoutShow extends Component
     }
     public function totalProductAmount()
     {
+        $this->totalProductAmount = 0;
         $this->carts = Cart::where('user_id', auth()->user()->id)->get();
         foreach ($this->carts  as $cartItem) {
             $this->totalProductAmount += $cartItem->product->selling_price * $cartItem->quantity;

@@ -122,10 +122,7 @@
                         </h4>
                         <hr>
                         @if($totalprice !='0')
-                        
                                <a href="{{ url('/checkout') }}" class="btn btn-warning">Checkout</a>
-                        
-                     
                         @endif
                     </div>
                 </div>
