@@ -99,4 +99,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('/slider/{slider_id}', 'update');
         Route::get('/slider/{slider_id}/delete', 'destroy');
     });
+
+    //admin orders
+    Route::controller(App\Http\Controllers\Admin\OrderController::class)->group(function () {
+        Route::get('/orders', 'index');
+        Route::get('/orders/{orderId}', 'show');
+        
+    });
+
 });
