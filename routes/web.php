@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('thank-you',[App\Http\Controllers\Frontend\FrontendController::class,'thankyou']);
 
-
+ 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     //dashboard
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
