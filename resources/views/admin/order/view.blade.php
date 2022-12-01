@@ -3,9 +3,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+            @if(session('message'))
+            <div class="alert alert-success mb-3">{{session('message')}}</div>
+            @endif
             <div class="card">
                 <div class="card-header">
-                    <h3>My Orders</h3>
+                    <h3>My Orders Detials</h3>
                 </div>
                 <hr>
 
@@ -96,6 +99,45 @@
                             </tbody>
                         </table>
 
+                    </div>
+                </div>
+            </div>
+            <div class="card border mt-3">
+                <div class="card-body">
+                    <h4>Order Process (Order Status Updates)</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <form action="{{ url('admin/orders/' . $orders->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <label for="">Update Your Order Status</label>
+                                <div class="input-group">
+                                    <select name="order_status" class="form-select">
+                                        <option value="">Select Status</option>
+                                        <option value="in progress"
+                                            {{ Request::get('status') == 'in progress' ? 'selected' : '' }}> In Progress
+                                        </option>
+                                        <option value="completed" {{ Request::get('status') == 'completed' ? 'selected' : '' }}>
+                                            Completed </option>
+                                        <option value="pending" {{ Request::get('status') == 'pending' ? 'selected' : '' }}>
+                                            Pending </option>
+                                        <option value="cancelled" {{ Request::get('status') == 'cancelled' ? 'selected' : '' }}>
+                                            Cancelled </option>
+                                        <option value="out-for-delivery"
+                                            {{ Request::get('status') == 'out-for-delivery' ? 'selected' : '' }}>Out for Delivery
+                                        </option>
+                                    </select>
+
+                                    <button type="submit" class="btn btn-primary text-white">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-7">
+                            <br>
+                            <h4 class="mt-3">Current Order Status: <span
+                                    class="text-uppercase">{{ $orders->status_message }}</span></h4>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -42,4 +42,16 @@ class OrderController extends Controller
             return redirect()->back()->with('message', 'no order found');
         }
     }
+    public function updateOrderStatus(int $orderId, Request $request)
+    {
+        $orders = Order::where('id', $orderId)->first();
+        if ($orders) {
+            $orders->update([
+                'status_message' => $request->order_status
+            ]);
+            return redirect('admin/orders/' . $orders->id)->with('message', 'Order Status Updated');
+        } else {
+            return redirect()->back()->with('message', 'no order found');
+        }
+    }
 }
