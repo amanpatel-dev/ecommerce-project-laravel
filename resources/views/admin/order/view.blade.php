@@ -64,8 +64,6 @@
                                             @else
                                                 <img src="#" style="width: 50px; height: 50px" alt="">
                                             @endif
-
-
                                         </td>
                                         <td>
                                             {{ $orderItem->product->name }}
