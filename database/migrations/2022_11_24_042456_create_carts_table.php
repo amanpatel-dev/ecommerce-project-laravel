@@ -18,7 +18,7 @@ class CreateCartsTable extends Migration
             $table->integer('user_id');
             $table->integer('product_id');
             $table->integer('product_color_id')->nullable();
-            $table->integer('quamtity');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
