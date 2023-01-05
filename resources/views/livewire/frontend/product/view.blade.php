@@ -10,9 +10,29 @@
                 <div class="col-md-5 mt-3">
                     <div class="bg-white border d-flex justify-content-center">
                         @if ($product->productImages)
-                            <img src="{{ asset($product->productImages[0]->image) }}" class=" product-view-img d-flex"
-                                alt="Img">
+                            {{-- <img src="{{ asset($product->productImages[0]->image) }}" class=" product-view-img d-flex"
+                                alt="Img"> --}}
 
+                            <div class="exzoom" id="exzoom">
+                                <!-- Images -->
+                                <div class="exzoom_img_box">
+                                    <ul class='exzoom_img_ul'>
+
+                                        @foreach($product->productImages as $items)
+                                        <li> <img src="{{ asset($items->image) }}" 
+                                            alt="Img"></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <!-- <a href="https://www.jqueryscript.net/tags.php?/Thumbnail/">Thumbnail</a> Nav-->
+                                <div class="exzoom_nav"></div>
+                                <!-- Nav Buttons -->
+                                <p class="exzoom_btn">
+                                    <a href="javascript:void(0);" class="exzoom_prev_btn">
+                                        < </a>
+                                            <a href="javascript:void(0);" class="exzoom_next_btn"> > </a>
+                                </p>
+                            </div>
                         @else{
                             <div class="">
                                 <h4>No image </h4>
@@ -72,18 +92,19 @@
                         <div class="mt-2">
                             <div class="input-group">
                                 <span class="btn btn1" wire:click="decrementQuantity"><i class="fa fa-minus"></i></span>
-                                <input type="text"     wire:model="quantityCount" value="{{$this->quantityCount}}" readonly class="input-quantity" />
+                                <input type="text" wire:model="quantityCount" value="{{ $this->quantityCount }}"
+                                    readonly class="input-quantity" />
                                 <span class="btn btn1" wire:click="incrementQuantity"><i class="fa fa-plus"></i></span>
                             </div>
                         </div>
                         <div class="mt-2">
                             <button href="" wire:click="addToCart({{ $product->id }})" class="btn btn1">
-                                 <i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                                <i class="fa fa-shopping-cart"></i> Add To Cart</button>
 
                             <button type="button" class="btn btn1" wire:click="addToWishList({{ $product->id }})">
-                                
+
                                 <span wire:loading.remove wire:target="addToWishList">
-                                    <i class="fa fa-heart"></i> Add To Wishlist 
+                                    <i class="fa fa-heart"></i> Add To Wishlist
                                 </span>
                                 <span wire:loading wire:target="addToWishList"> Adding</span>
 
@@ -114,3 +135,29 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+          jQuery(document).ready(function() {
+ 
+
+            jQuery("#exzoom").exzoom({
+
+                // thumbnail nav options
+                "navWidth": 60,
+                "navHeight": 60,
+                "navItemNum": 5,
+                "navItemMargin": 7,
+                "navBorder": 1,
+
+                // autoplay
+                "autoPlay": false,
+
+                // autoplay interval in milliseconds
+                "autoPlayTimeout": 2000
+
+            });
+
+        });
+    </script>
+@endpush

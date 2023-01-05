@@ -62,8 +62,8 @@
                     <h1>Trendings 📈📈📈</h1>
                     <div class="underline"></div>
                     <div class="row ">
-                        <div class="col-md-4 owl-carousel trending-product   owl-theme">
-                            @forelse ($trendingProducts as $productItem)
+                        <div class="col-md-4  owl-carousel owl-theme ">
+                        @forelse ($trendingProducts as $productItem)
                                 <div class="item">
                                     <div class="product-card">
                                         @if ($productItem->quantity > 0)
@@ -101,77 +101,43 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            @empty
-                                <div class="col-md-12">
-                                    <div class="p-2">
-                                        <h3>No Product Available</h3>
-                                    </div>
+                        @empty
+                            <div class="col-md-12">
+                                <div class="p-2">
+                                    <h3>No Product Available</h3>
                                 </div>
-                            @endforelse
-                        </div>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
+
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="owl-carousel owl-theme">
-        <div class="item">
-            <h4>1</h4>
-        </div>
-        <div class="item">
-            <h4>2</h4>
-        </div>
-        <div class="item">
-            <h4>3</h4>
-        </div>
-        <div class="item">
-            <h4>4</h4>
-        </div>
-        <div class="item">
-            <h4>5</h4>
-        </div>
-        <div class="item">
-            <h4>6</h4>
-        </div>
-        <div class="item">
-            <h4>7</h4>
-        </div>
-        <div class="item">
-            <h4>8</h4>
-        </div>
-        <div class="item">
-            <h4>9</h4>
-        </div>
-        <div class="item">
-            <h4>10</h4>
-        </div>
-        <div class="item">
-            <h4>11</h4>
-        </div>
-        <div class="item">
-            <h4>12</h4>
-        </div>
-    </div>
+
 @endsection
 
 @section('script')
     <script>
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 5
+        jQuery(document).ready(function() {
+            jQuery('.owl-carousel ').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
                 }
-            }
-        })
+            })
+        });
     </script>
 @endsection
